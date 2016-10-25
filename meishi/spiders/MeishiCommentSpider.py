@@ -2,9 +2,6 @@
 # Website Cached at: 2016-07-24 14:12:11
 
 import random
-import json
-import urlparse
-import urllib
 
 from scrapy.spiders import BaseSpider
 
@@ -29,7 +26,7 @@ class MeishiCommentSpider(BaseSpider):
         "idtype": "recipe",
         "r": 0
     }
-    max_limit = 272353
+    max_limit = MeishiCommentItem.max_id()
 
     def __init__(self):
         for i in range(1, self.max_limit):
@@ -40,14 +37,7 @@ class MeishiCommentSpider(BaseSpider):
 
     def parse(self, response):
         items = []
-        raw = response.text
-        obj = json.loads(raw)
-        item = MeishiComment()
-        url = response.url
-        result = urlparse.urlparse(url)
-        params = urlparse.parse_qs(result.query, True)
-        item['recipeId'] = int(params['id'][0])
-        item['commentObj'] = obj['data']
+        item = MeishiCommentItem(response)
         items.append(item)
         info('parsed ' + str(response))
         return items
