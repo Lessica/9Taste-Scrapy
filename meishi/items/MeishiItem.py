@@ -1,10 +1,5 @@
 # -*- coding: utf-8 -*-
 
-# Define here the models for your scraped items
-#
-# See documentation in:
-# http://doc.scrapy.org/en/latest/topics/items.html
-
 import scrapy
 
 
@@ -23,13 +18,3 @@ class MeishiItem(scrapy.Item):
     recipeDoTypes = scrapy.Field()
     recipeDescription = scrapy.Field()
     recipeTip = scrapy.Field()
-
-
-class MeishiComment(scrapy.Item):
-    recipeId = scrapy.Field()
-    commentObj = scrapy.Field()
-
-
-class MeishiFavItem(scrapy.Item):
-    userId = scrapy.Field()
-    recipeId = scrapy.Field()

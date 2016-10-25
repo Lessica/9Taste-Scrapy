@@ -7,7 +7,7 @@ from scrapy.selector import Selector
 from scrapy.spiders import BaseSpider
 
 from meishi.misc.log import *
-from meishi.items import *
+from meishi.items.MeishiFavItem import *
 
 
 class MeishiFavSpider(BaseSpider):

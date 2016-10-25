@@ -9,7 +9,7 @@ import urllib
 from scrapy.spiders import BaseSpider
 
 from meishi.misc.log import *
-from meishi.items import *
+from meishi.items.MeishiCommentItem import *
 
 
 class MeishiCommentSpider(BaseSpider):
