@@ -20,7 +20,3 @@ class MeishiCommentItem(scrapy.Item):
         params = urlparse.parse_qs(result.query, True)
         self['recipeId'] = int(params['id'][0])
         self['commentObj'] = obj['data']
-
-    @staticmethod
-    def max_id():
-        return 272353

@@ -118,8 +118,3 @@ class MeishiItem(scrapy.Item):
             tip = tip.extract()[0].strip()
             if len(tip) != 0:
                 self['recipeTip'] = tip
-
-    @staticmethod
-    def max_id():
-        return 272353
-    

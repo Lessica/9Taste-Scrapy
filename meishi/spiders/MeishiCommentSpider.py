@@ -3,13 +3,13 @@
 
 import random
 
-from scrapy.spiders import BaseSpider
+from scrapy.spiders import Spider
 
 from meishi.misc.log import *
 from meishi.items.MeishiCommentItem import *
 
 
-class MeishiCommentSpider(BaseSpider):
+class MeishiCommentSpider(Spider):
     name = "meishi_comment"
     allowed_domains = ["meishichina.com"]
     start_urls = []
@@ -26,9 +26,10 @@ class MeishiCommentSpider(BaseSpider):
         "idtype": "recipe",
         "r": 0
     }
-    max_limit = MeishiCommentItem.max_id()
+    max_limit = 295804
 
-    def __init__(self):
+    def __init__(self, *a, **kw):
+        super(MeishiCommentSpider, self).__init__(*a, **kw)
         for i in range(1, self.max_limit):
             arguments = self.base_arguments
             arguments["id"] = i

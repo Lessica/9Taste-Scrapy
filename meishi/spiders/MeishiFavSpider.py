@@ -4,28 +4,33 @@
 import urlparse
 
 from scrapy.selector import Selector
-from scrapy.spiders import BaseSpider
+from scrapy.spiders import CrawlSpider, Rule
+from scrapy.linkextractors import LinkExtractor
 
 from meishi.misc.log import *
 from meishi.items.MeishiFavItem import *
 
 
-class MeishiFavSpider(BaseSpider):
+class MeishiFavSpider(CrawlSpider):
     name = "meishi_fav"
     allowed_domains = ["meishichina.com"]
     start_urls = []
     base_url = "http://home.meishichina.com/"
-    max_limit = 272353
+    rules = (
+        Rule(link_extractor = LinkExtractor(
+            allow=(r'space-\d+-do-favrecipe-page-\d+\.html'),
+            unique=True
+        ), callback='parse', follow=True),
+    )
+    max_limit = 5
 
-    def __init__(self):
+    def __init__(self, *a, **kw):
+        super(MeishiFavSpider, self).__init__(*a, **kw)
         for i in range(1, self.max_limit):
-            self.start_urls.append(self.base_url + "recipe-" + str(i) + ".html")
+            self.start_urls.append(self.base_url + "space-" + str(i) + "-do-favrecipe.html")
 
     def parse(self, response):
-        items = []
         sel = Selector(response)
         item = MeishiFavItem()
-
-        items.append(item)
         info('parsed ' + str(response))
-        return items
+        yield item

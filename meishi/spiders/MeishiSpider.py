@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
-# Website Cached at: 2016-10-25 09:09:46
+# Website Cached at: 2016-10-27 15:45:23
 # scrapy crawl meishi_spider
 
 import urlparse
 
-from scrapy.spiders import BaseSpider
+from scrapy.spiders import Spider
 from meishi.misc.log import *
 from meishi.items.MeishiItem import *
 
 
-class MeishiSpider(BaseSpider):
+class MeishiSpider(Spider):
     name = "meishi"
     allowed_domains = ["meishichina.com"]
     start_urls = []
     base_url = "http://home.meishichina.com/"
-    max_limit = MeishiItem.max_id()
+    max_limit = 295804
 
-    def __init__(self):
+    def __init__(self, *a, **kw):
+        super(MeishiSpider, self).__init__(*a, **kw)
         for i in range(1, self.max_limit):
             self.start_urls.append(self.base_url + "recipe-" + str(i) + ".html")
 
