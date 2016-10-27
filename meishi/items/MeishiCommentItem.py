@@ -12,7 +12,7 @@ class MeishiCommentItem(scrapy.Item):
     def __init__(self, response):
         super(MeishiCommentItem, self).__init__(self)
 
-        raw = response.text
+        raw = response.body
         obj = json.loads(raw)
         url = response.url
         result = urlparse.urlparse(url)
