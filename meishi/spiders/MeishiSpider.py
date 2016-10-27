@@ -2,7 +2,6 @@
 # Website Cached at: 2016-10-27 15:45:23
 # scrapy crawl meishi_spider
 
-import urlparse
 
 from scrapy.spiders import Spider
 from meishi.misc.log import *
@@ -22,8 +21,6 @@ class MeishiSpider(Spider):
             self.start_urls.append(self.base_url + "recipe-" + str(i) + ".html")
 
     def parse(self, response):
-        items = []
         item = MeishiItem(response)
-        items.append(item)
         info('parsed ' + str(response))
-        return items
+        return item

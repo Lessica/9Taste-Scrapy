@@ -3,7 +3,6 @@
 import scrapy
 import json
 import urlparse
-import urllib
 
 
 class MeishiCommentItem(scrapy.Item):

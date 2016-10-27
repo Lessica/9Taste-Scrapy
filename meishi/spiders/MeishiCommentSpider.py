@@ -2,6 +2,7 @@
 # Website Cached at: 2016-07-24 14:12:11
 
 import random
+import urllib
 
 from scrapy.spiders import Spider
 
@@ -37,8 +38,6 @@ class MeishiCommentSpider(Spider):
             self.start_urls.append(self.base_url + "?" + urllib.urlencode(arguments))
 
     def parse(self, response):
-        items = []
         item = MeishiCommentItem(response)
-        items.append(item)
         info('parsed ' + str(response))
-        return items
+        return item

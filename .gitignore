@@ -1,4 +1,4 @@
 .scrapy
 .vscode
 .DS_Store
-.pyc
+*.pyc
