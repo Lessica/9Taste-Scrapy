@@ -15,7 +15,7 @@ class MeishiFavSpider(Spider):
     allowed_domains = ["meishichina.com"]
     start_urls = []
     base_url = "http://home.meishichina.com/"
-    max_limit = 9836579
+    max_limit = 2
 
     def __init__(self, *a, **kw):
         super(MeishiFavSpider, self).__init__(*a, **kw)
@@ -28,14 +28,14 @@ class MeishiFavSpider(Spider):
         if user_id:
             user_id = int(user_id.extract()[0])
         items = []
-        j_list = sel.css('#J_list > li')
+        j_list = sel.css('#J_list > ul > li')
         for j_detail in j_list:
             item = MeishiFavItem()
-            item.userId = user_id
-            recipe_id = j_detail.xpath('@data-id')
+            item['userId'] = user_id
+            recipe_id = j_detail.css('li').xpath('@data-id')
             if recipe_id:
                 recipe_id = recipe_id.extract()[0]
-            item.recipeId = recipe_id
+            item['recipeId'] = recipe_id
             items.append(item)
         info('parsed ' + str(response))
         next_urls = sel.css('.ui-page-inner > a')
