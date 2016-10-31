@@ -19,7 +19,7 @@ class MeishiFavSpider(Spider):
 
     def __init__(self, *a, **kw):
         super(MeishiFavSpider, self).__init__(*a, **kw)
-        for i in range(792234, self.max_limit):
+        for i in range(791957, self.max_limit):
             self.start_urls.append(self.base_url + "space-" + str(i) + "-do-favrecipe.html")
 
     def parse(self, response):
@@ -43,6 +43,5 @@ class MeishiFavSpider(Spider):
             next_url = next_urls[len(next_urls) - 1].xpath('@href')
             if next_url:
                 next_url = next_url.extract()[0]
-                yield Request(url=next_url, callback=self.parse)
-        for e in items:
-            yield e
+                self.start_urls.append(next_url)
+        return items
