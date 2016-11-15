@@ -15,12 +15,15 @@ class MeishiFavSpider(Spider):
     allowed_domains = ["meishichina.com"]
     start_urls = []
     base_url = "http://home.meishichina.com/"
-    max_limit = 1000000 # 9836579
+    # max_limit = 2000000  # 9836579
+    # 1 - 792556
+    # 1292557 - ?
 
     def __init__(self, *a, **kw):
         super(MeishiFavSpider, self).__init__(*a, **kw)
-        for i in range(791957, self.max_limit):
-            self.start_urls.append(self.base_url + "space-" + str(i) + "-do-favrecipe.html")
+        uidf = open('../raw/ui.csv', 'rb')
+        for uidl in uidf:
+            self.start_urls.append(self.base_url + "space-" + uidl + "-do-favrecipe.html")
 
     def parse(self, response):
         sel = Selector(response)

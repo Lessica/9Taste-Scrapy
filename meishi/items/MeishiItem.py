@@ -18,7 +18,6 @@ class MeishiItem(scrapy.Item):
     recipeDescription = scrapy.Field()
     recipeTip = scrapy.Field()
 
-
     def __init__(self, response):
         super(MeishiItem, self).__init__(self)
 
